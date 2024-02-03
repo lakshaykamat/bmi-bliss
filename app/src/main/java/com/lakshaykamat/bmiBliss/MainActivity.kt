@@ -1,4 +1,4 @@
-package com.lakshaykamat.bmiCalculator
+package com.lakshaykamat.bmiBliss
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -9,8 +9,8 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.lakshaykamat.bmiCalculator.ui.BmiApp
-import com.lakshaykamat.bmiCalculator.ui.theme.BMICalculatorTheme
+import com.lakshaykamat.bmiBliss.ui.BmiApp
+import com.lakshaykamat.bmiBliss.ui.theme.BMICalculatorTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -1,4 +1,4 @@
-package com.lakshaykamat.bmiCalculator.ui.theme
+package com.lakshaykamat.bmiBliss.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

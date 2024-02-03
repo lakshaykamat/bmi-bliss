@@ -1,4 +1,4 @@
-package com.lakshaykamat.bmiCalculator.ui.theme
+package com.lakshaykamat.bmiBliss.ui.theme
 
 import android.app.Activity
 import android.os.Build

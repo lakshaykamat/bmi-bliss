@@ -1,4 +1,4 @@
-package com.lakshaykamat.bmiCalculator.ui
+package com.lakshaykamat.bmiBliss.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -28,9 +28,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.lakshaykamat.bmiCalculator.data.BMI
-import com.lakshaykamat.bmiCalculator.data.BmiResult
-import com.lakshaykamat.bmiCalculator.ui.theme.BMICalculatorTheme
+import com.lakshaykamat.bmiBliss.data.BMI
+import com.lakshaykamat.bmiBliss.data.BmiResult
+import com.lakshaykamat.bmiBliss.ui.theme.BMICalculatorTheme
 
 
 @OptIn(ExperimentalMaterial3Api::class)

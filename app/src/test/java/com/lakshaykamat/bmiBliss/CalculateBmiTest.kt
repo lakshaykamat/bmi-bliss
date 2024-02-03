@@ -1,7 +1,7 @@
-package com.lakshaykamat.bmiCalculator
+package com.lakshaykamat.bmiBliss
 
-import com.lakshaykamat.bmiCalculator.data.BMI
-import com.lakshaykamat.bmiCalculator.data.BmiResult
+import com.lakshaykamat.bmiBliss.data.BMI
+import com.lakshaykamat.bmiBliss.data.BmiResult
 import org.junit.Assert.assertEquals
 import org.junit.Test
 

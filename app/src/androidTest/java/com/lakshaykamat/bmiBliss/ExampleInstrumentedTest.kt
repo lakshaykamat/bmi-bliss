@@ -1,4 +1,4 @@
-package com.lakshaykamat.bmiCalculator
+package com.lakshaykamat.bmiBliss
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

@@ -1,4 +1,4 @@
-package com.lakshaykamat.bmiCalculator.data
+package com.lakshaykamat.bmiBliss.data
 
 data class BmiResult(val value: Double, val category: String)
 

@@ -56,17 +56,17 @@ object BMI {
 
     /**
      * Calculates BMI with gender adjustment.
-     * @param weight Weight in kilograms.
-     * @param height Height in meters.
-     * @param genderAdjustment Adjustment value based on gender (1.0 for Male, -1.0 for Female).
+     * @param weightInKg Weight in kilograms.
+     * @param heightInCm Height in centimeter.
+     * @param genderAdjustment Adjustment value based on gender (0.5 for Male, -0.5 for Female).
      * @return Calculated BMI value.
      */
-    private fun calculateBmiForGender(weight: Double, height: Double, genderAdjustment: Double): Double {
+    private fun calculateBmiMetricUnits(weightInKg: Double, heightInCm: Double, genderAdjustment: Double): Double {
         // Calculate BMI and format to two decimal places
-        val bmi = (weight / (height * height)) + genderAdjustment
+        val height = heightInCm/100.0
+        val bmi = (weightInKg / (height * height)) + genderAdjustment
         return "%.2f".format(bmi).toDouble()
     }
-
     /**
      * Returns the BMI category as a string based on the provided Body enum.
      * @param category BMI category (Normal weight, Overweight, Obese, Underweight, MarginallyOverweight).

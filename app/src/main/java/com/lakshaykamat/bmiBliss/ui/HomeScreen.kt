@@ -115,7 +115,7 @@ fun BmiApp(modifier: Modifier = Modifier) {
 
             //Height Input Field
             TextField(
-                label = { Text(text = "Metre") },
+                label = { Text(text = "Centimetre") },
                 value = heightInputState,
                 onValueChange = { heightInputState = it },
                 keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number)
@@ -155,11 +155,6 @@ fun BmiApp(modifier: Modifier = Modifier) {
                         gender = selectedGender!!
                     )
                 }
-                bmi = BMI.performBmiOperation(
-                    weightInputState,
-                    heightInputState,
-                    gender = BMI.Gender.Male
-                )
 
             }) {
                 Text(text = "Calculate")

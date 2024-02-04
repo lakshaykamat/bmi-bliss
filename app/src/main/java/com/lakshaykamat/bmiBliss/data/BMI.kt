@@ -18,7 +18,7 @@ object BMI {
      */
     private fun calculateBMI(weight: Double, height: Double, gender: Gender): BmiResult {
         // Calculate BMI with gender adjustment
-        val bmi = calculateBmiForGender(weight, height, if (gender == Gender.Female) -1.0 else 1.0)
+        val bmi = calculateBmiMetricUnits(weight, height, if (gender == Gender.Female) -0.5 else 0.5)
 
         // Determine BMI category based on calculated BMI
         val category = when {

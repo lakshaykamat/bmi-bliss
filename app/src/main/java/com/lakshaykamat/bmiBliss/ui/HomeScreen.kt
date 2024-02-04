@@ -148,6 +148,13 @@ fun BmiApp(modifier: Modifier = Modifier) {
 
             //Calculate Button
             Button(modifier = Modifier.fillMaxWidth(), onClick = {
+                if (selectedGender != null) {
+                    bmi = BMI.performBmiOperation(
+                        weightInputState,
+                        heightInputState,
+                        gender = selectedGender!!
+                    )
+                }
                 bmi = BMI.performBmiOperation(
                     weightInputState,
                     heightInputState,

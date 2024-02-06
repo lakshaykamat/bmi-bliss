@@ -95,7 +95,7 @@ fun BmiApp(modifier: Modifier = Modifier) {
     ) {
         //Top App Bar
         AppTopBar(
-            title = stringResource(id = R.string.app_name),
+            title = stringResource(R.string.app_name),
             haveBackButton = false,
             actionButton = {
                 IconButton(

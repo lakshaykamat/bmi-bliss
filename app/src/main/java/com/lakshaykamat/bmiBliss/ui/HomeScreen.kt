@@ -1,6 +1,5 @@
 package com.lakshaykamat.bmiBliss.ui
 
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -20,6 +19,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RadioButton
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TopAppBar
@@ -30,12 +30,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.lakshaykamat.bmiBliss.R
 import com.lakshaykamat.bmiBliss.data.BMI
 import com.lakshaykamat.bmiBliss.data.BmiResult
 import com.lakshaykamat.bmiBliss.ui.theme.BMICalculatorTheme
@@ -83,6 +85,8 @@ fun BmiApp(modifier: Modifier = Modifier) {
     var selectedGender by remember { mutableStateOf<BMI.Gender?>(null) }
 
     var bmi by remember { mutableStateOf<BmiResult?>(null) }
+
+    val (inMetricUnits, setIsMetricUnits) = remember { mutableStateOf(false) }
     Column(
         modifier = modifier
             .verticalScroll(rememberScrollState())
@@ -92,7 +96,7 @@ fun BmiApp(modifier: Modifier = Modifier) {
     ) {
         //Top App Bar
         AppTopBar(
-            title = "BMI Calculator",
+            title = stringResource(R.string.app_name),
             haveBackButton = false,
             actionButton = {
                 IconButton(
@@ -105,7 +109,13 @@ fun BmiApp(modifier: Modifier = Modifier) {
         Column(modifier = Modifier.width(270.dp)) {
             //Weight Input Field
             TextField(
-                label = { Text(text = "Kilograms") },
+                leadingIcon = {
+                    Icon(
+                        painter = painterResource(id = R.drawable.weight_fill_icon),
+                        contentDescription = null
+                    )
+                },
+                label = { Text(text = if (inMetricUnits) "Kilogram" else "Pounds") },
                 value = weightInputState,
                 onValueChange = { weightInputState = it },
                 keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number)
@@ -115,7 +125,13 @@ fun BmiApp(modifier: Modifier = Modifier) {
 
             //Height Input Field
             TextField(
-                label = { Text(text = "Centimetre") },
+                leadingIcon = {
+                    Icon(
+                        painter = painterResource(id = R.drawable.height_fill_icon),
+                        contentDescription = null
+                    )
+                },
+                label = { Text(text = if (inMetricUnits) "Centimetre" else "Feet") },
                 value = heightInputState,
                 onValueChange = { heightInputState = it },
                 keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number)
@@ -123,28 +139,47 @@ fun BmiApp(modifier: Modifier = Modifier) {
             Margin(value = 10, isVertical = true, isHorizontal = false)
 
 
-            //Radio Buttons for gender
-            Row(
-                // modifier = Modifier.padding(8.dp),
-                modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Start
-            ) {
-                Text(text = "Gender", style = MaterialTheme.typography.bodyLarge)
-                BMI.Gender.entries.forEach { gender ->
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        RadioButton(
-                            selected = (gender == selectedGender),
-                            onClick = { selectedGender = gender }
-                        )
-                        Text(
-                            text = gender.toString(),
-                            style = MaterialTheme.typography.bodyMedium,
-                        )
+
+            Column {
+                //Radio Buttons for gender
+                Row(
+                    // modifier = Modifier.padding(8.dp),
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Text(text = "Gender", style = MaterialTheme.typography.bodyLarge)
+                    BMI.Gender.entries.forEach { gender ->
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            RadioButton(
+                                selected = (gender == selectedGender),
+                                onClick = { selectedGender = gender }
+                            )
+                            Text(
+                                text = gender.toString(),
+                                style = MaterialTheme.typography.bodyMedium,
+                            )
+                        }
+
                     }
+                }
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text(text = "Metric Units")
+                    Switch(
+                        checked = inMetricUnits,
+                        onCheckedChange = { newCheckedState ->
+                            setIsMetricUnits(newCheckedState)
+                        },
+                        modifier = Modifier.padding(8.dp)
+                    )
                 }
             }
             Margin(value = 10, isVertical = true, isHorizontal = false)
+
 
             //Calculate Button
             Button(modifier = Modifier.fillMaxWidth(), onClick = {
@@ -152,7 +187,8 @@ fun BmiApp(modifier: Modifier = Modifier) {
                     bmi = BMI.performBmiOperation(
                         weightInputState,
                         heightInputState,
-                        gender = selectedGender!!
+                        gender = selectedGender!!,
+                        inMetricUnits
                     )
                 }
 

@@ -16,9 +16,27 @@ object BMI {
      * @param gender Gender of the person (Male/Female).
      * @return BmiResult containing BMI value and corresponding category.
      */
-    private fun calculateBMI(weight: Double, height: Double, gender: Gender): BmiResult {
+    private fun calculateBMI(
+        weight: Double,
+        height: Double,
+        gender: Gender,
+        inMetricUnits: Boolean
+    ): BmiResult {
         // Calculate BMI with gender adjustment
-        val bmi = calculateBmiMetricUnits(weight, height, if (gender == Gender.Female) -0.5 else 0.5)
+        val bmi = if (inMetricUnits) {
+            calculateBmiWithMetricUnits(
+                weight,
+                height,
+                if (gender == Gender.Female) -0.5 else 0.5
+            )
+        } else {
+            calculateBmiWithMetricUnits(
+                (weight / 2.205),
+                (height * 30.48),
+                if (gender == Gender.Female) -0.5 else 0.5
+            )
+        }
+
 
         // Determine BMI category based on calculated BMI
         val category = when {
@@ -39,7 +57,12 @@ object BMI {
      * @param gender Gender of the person (Male/Female).
      * @return BmiResult if calculation is successful, otherwise null.
      */
-    fun performBmiOperation(weight: String, height: String, gender: Gender): BmiResult? {
+    fun performBmiOperation(
+        weight: String,
+        height: String,
+        gender: Gender,
+        inMetricUnits: Boolean
+    ): BmiResult? {
         // Convert weight and height to Double
         val parsedWeight = weight.toDoubleOrNull()
         val parsedHeight = height.toDoubleOrNull()
@@ -47,7 +70,7 @@ object BMI {
         // Check if conversion is successful
         if (parsedWeight != null && parsedHeight != null) {
             // Perform BMI calculation
-            return calculateBMI(parsedWeight, parsedHeight, gender)
+            return calculateBMI(parsedWeight, parsedHeight, gender, inMetricUnits)
         }
 
         // Return null if weight or height is not a valid number
@@ -61,12 +84,16 @@ object BMI {
      * @param genderAdjustment Adjustment value based on gender (0.5 for Male, -0.5 for Female).
      * @return Calculated BMI value.
      */
-    private fun calculateBmiMetricUnits(weightInKg: Double, heightInCm: Double, genderAdjustment: Double): Double {
-        // Calculate BMI and format to two decimal places
-        val height = heightInCm/100.0
+    private fun calculateBmiWithMetricUnits(
+        weightInKg: Double,
+        heightInCm: Double,
+        genderAdjustment: Double
+    ): Double {
+        val height = heightInCm / 100.0
         val bmi = (weightInKg / (height * height)) + genderAdjustment
         return "%.2f".format(bmi).toDouble()
     }
+
     /**
      * Returns the BMI category as a string based on the provided Body enum.
      * @param category BMI category (Normal weight, Overweight, Obese, Underweight, MarginallyOverweight).

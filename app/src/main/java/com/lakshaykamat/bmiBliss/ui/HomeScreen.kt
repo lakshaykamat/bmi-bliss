@@ -30,6 +30,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
@@ -108,7 +109,13 @@ fun BmiApp(modifier: Modifier = Modifier) {
         Column(modifier = Modifier.width(270.dp)) {
             //Weight Input Field
             TextField(
-                label = { Text(text = if(inMetricUnits) "Kilogram" else "Pounds") },
+                leadingIcon = {
+                    Icon(
+                        painter = painterResource(id = R.drawable.weight_fill_icon),
+                        contentDescription = null
+                    )
+                },
+                label = { Text(text = if (inMetricUnits) "Kilogram" else "Pounds") },
                 value = weightInputState,
                 onValueChange = { weightInputState = it },
                 keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number)
@@ -118,7 +125,13 @@ fun BmiApp(modifier: Modifier = Modifier) {
 
             //Height Input Field
             TextField(
-                label = { Text(text = if(inMetricUnits) "Centimetre" else "Feet") },
+                leadingIcon = {
+                    Icon(
+                        painter = painterResource(id = R.drawable.height_fill_icon),
+                        contentDescription = null
+                    )
+                },
+                label = { Text(text = if (inMetricUnits) "Centimetre" else "Feet") },
                 value = heightInputState,
                 onValueChange = { heightInputState = it },
                 keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number)
@@ -150,11 +163,11 @@ fun BmiApp(modifier: Modifier = Modifier) {
 
                     }
                 }
-                Row (
+                Row(
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.SpaceBetween,
                     modifier = Modifier.fillMaxWidth()
-                ){
+                ) {
                     Text(text = "Metric Units")
                     Switch(
                         checked = inMetricUnits,

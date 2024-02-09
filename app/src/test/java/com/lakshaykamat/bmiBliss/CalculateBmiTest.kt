@@ -1,7 +1,7 @@
 package com.lakshaykamat.bmiBliss
 
 import com.lakshaykamat.bmiBliss.viewModel.BMI
-import com.lakshaykamat.bmiBliss.data.BmiResult
+import com.lakshaykamat.bmiBliss.data.Bmi
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
@@ -33,12 +33,12 @@ class CalculateBmiTest {
             expectedBmiCategory = "Normal weight"
         )
 
-        val result: BmiResult? =
+        val result: Bmi? =
             BMI.performBmiOperation(bmi.weight, bmi.height, bmi.gender, bmi.isMetricUnits)
 
         if (result != null) {
             assertEquals(bmi.expectedBmiCategory, result.category)
-            assertEquals(bmi.expectedBmi, result.value)
+            assertEquals(bmi.expectedBmi, result.bmi)
         }
     }
 
@@ -53,11 +53,11 @@ class CalculateBmiTest {
             expectedBmiCategory = "Normal weight"
         )
 
-        val result: BmiResult? =
+        val result: Bmi? =
             BMI.performBmiOperation(bmi.weight, bmi.height, bmi.gender, bmi.isMetricUnits)
 
         if (result != null) {
-            assertEquals(bmi.expectedBmi, result.value)
+            assertEquals(bmi.expectedBmi, result.bmi)
             assertEquals(bmi.expectedBmiCategory, result.category)
         }
     }

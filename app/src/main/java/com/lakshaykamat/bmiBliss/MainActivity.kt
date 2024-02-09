@@ -9,7 +9,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.lakshaykamat.bmiBliss.ui.BmiApp
+import com.lakshaykamat.bmiBliss.view.screens.BmiApp
 import com.lakshaykamat.bmiBliss.ui.theme.BMICalculatorTheme
 
 class MainActivity : ComponentActivity() {

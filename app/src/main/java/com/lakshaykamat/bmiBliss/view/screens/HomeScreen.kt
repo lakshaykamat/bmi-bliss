@@ -39,7 +39,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.lakshaykamat.bmiBliss.R
 import com.lakshaykamat.bmiBliss.viewModel.BMI
-import com.lakshaykamat.bmiBliss.data.BmiResult
+import com.lakshaykamat.bmiBliss.data.Bmi
 import com.lakshaykamat.bmiBliss.ui.theme.BMICalculatorTheme
 
 
@@ -84,7 +84,7 @@ fun BmiApp(modifier: Modifier = Modifier) {
 
     var selectedGender by remember { mutableStateOf<BMI.Gender?>(null) }
 
-    var bmi by remember { mutableStateOf<BmiResult?>(null) }
+    var bmi by remember { mutableStateOf<Bmi?>(null) }
 
     val (inMetricUnits, setIsMetricUnits) = remember { mutableStateOf(false) }
     Column(
@@ -200,7 +200,7 @@ fun BmiApp(modifier: Modifier = Modifier) {
             //Result
             if (bmi !== null) {
                 Text(
-                    text = "Body Mass Index: ${bmi!!.value}",
+                    text = "Body Mass Index: ${bmi!!.bmi}",
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold
                 )

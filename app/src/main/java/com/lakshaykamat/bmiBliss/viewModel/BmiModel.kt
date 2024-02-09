@@ -1,8 +1,7 @@
 package com.lakshaykamat.bmiBliss.viewModel
 
-import com.lakshaykamat.bmiBliss.data.BmiResult
+import com.lakshaykamat.bmiBliss.data.Bmi
 import kotlin.math.roundToInt
-
 
 
 object BMI {
@@ -24,7 +23,7 @@ object BMI {
         height: Double,
         gender: Gender,
         inMetricUnits: Boolean
-    ): BmiResult {
+    ): Bmi {
         // Calculate BMI with gender adjustment
         val bmi = if (inMetricUnits) {
             calculateBmiWithMetricUnits(
@@ -50,7 +49,7 @@ object BMI {
             else -> Body.Obese
         }
 
-        return BmiResult(bmi, getBMIStringCategory(category))
+        return Bmi(bmi, getBMIStringCategory(category))
     }
 
     /**
@@ -65,7 +64,7 @@ object BMI {
         height: String,
         gender: Gender,
         inMetricUnits: Boolean
-    ): BmiResult? {
+    ): Bmi? {
         // Convert weight and height to Double
         val parsedWeight = weight.toDoubleOrNull()
         val parsedHeight = height.toDoubleOrNull()

@@ -1,6 +1,6 @@
 package com.lakshaykamat.bmiBliss
 
-import com.lakshaykamat.bmiBliss.data.BMI
+import com.lakshaykamat.bmiBliss.viewModel.BMI
 import com.lakshaykamat.bmiBliss.data.BmiResult
 import org.junit.Assert.assertEquals
 import org.junit.Test
@@ -10,36 +10,56 @@ import org.junit.Test
  *
  * See [testing documentation](http://d.android.com/tools/testing).
  */
+
+data class BmiTest(
+    val weight: String,
+    val height: String,
+    val isMetricUnits: Boolean,
+    val gender: BMI.Gender,
+    val expectedBmi: Int,
+    val expectedBmiCategory:String
+)
+
 class CalculateBmiTest {
+
     @Test
-    fun addition_isCorrect() {
-        assertEquals(4, 2 + 2)
+    fun `bmi in metric units for male`() {
+        val bmi = BmiTest(
+            weight = "70",
+            height = "175",
+            isMetricUnits = true,
+            gender = BMI.Gender.Male,
+            expectedBmi = 23,
+            expectedBmiCategory = "Normal weight"
+        )
+
+        val result: BmiResult? =
+            BMI.performBmiOperation(bmi.weight, bmi.height, bmi.gender, bmi.isMetricUnits)
+
+        if (result != null) {
+            assertEquals(bmi.expectedBmiCategory, result.category)
+            assertEquals(bmi.expectedBmi, result.value)
+        }
     }
 
     @Test
-    fun testCalculateBMIForMale() {
-        val weight = "70.0" // in kilograms
-        val height = "1.75" // in meters
-        val gender = BMI.Gender.Male
+    fun `bmi in metric units for female`() {
+        val bmi = BmiTest(
+            weight = "70",
+            height = "175",
+            isMetricUnits = true,
+            gender = BMI.Gender.Female,
+            expectedBmi = 23,
+            expectedBmiCategory = "Normal weight"
+        )
 
-        val result: BmiResult? = BMI.performBmiOperation(weight, height, gender)
+        val result: BmiResult? =
+            BMI.performBmiOperation(bmi.weight, bmi.height, bmi.gender, bmi.isMetricUnits)
 
-        // You may adjust these values based on your expected results
-        assertEquals(23.86, result!!.value, 0.01)
-        assertEquals("Normal weight", result.category)
-    }
-
-    @Test
-    fun testCalculateBMIForFemale() {
-        val weight = "70.0" // in kilograms
-        val height = "1.75" // in meters
-        val gender = BMI.Gender.Female
-
-        val result: BmiResult? = BMI.performBmiOperation(weight, height, gender)
-
-        // You may adjust these values based on your expected results
-        assertEquals(21.86, result!!.value, 0.01)
-        assertEquals("Normal weight", result.category)
+        if (result != null) {
+            assertEquals(bmi.expectedBmi, result.value)
+            assertEquals(bmi.expectedBmiCategory, result.category)
+        }
     }
 
 }

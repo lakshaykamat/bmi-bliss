@@ -1,6 +1,9 @@
-package com.lakshaykamat.bmiBliss.data
+package com.lakshaykamat.bmiBliss.viewModel
 
-data class BmiResult(val value: Double, val category: String)
+import com.lakshaykamat.bmiBliss.data.BmiResult
+import kotlin.math.roundToInt
+
+
 
 object BMI {
     enum class Body {
@@ -27,13 +30,13 @@ object BMI {
             calculateBmiWithMetricUnits(
                 weight,
                 height,
-                if (gender == Gender.Female) -0.5 else 0.5
+                if (gender == Gender.Female) 0.0 else 0.0
             )
         } else {
             calculateBmiWithMetricUnits(
                 (weight / 2.205),
                 (height * 30.48),
-                if (gender == Gender.Female) -0.5 else 0.5
+                if (gender == Gender.Female) 0.0 else 0.0
             )
         }
 
@@ -88,11 +91,12 @@ object BMI {
         weightInKg: Double,
         heightInCm: Double,
         genderAdjustment: Double
-    ): Double {
-        val height = heightInCm / 100.0
-        val bmi = (weightInKg / (height * height)) + genderAdjustment
-        return "%.2f".format(bmi).toDouble()
+    ): Int {
+        val heightInInch = heightInCm / 100.0
+        val bmi = (weightInKg / (heightInInch * heightInInch)) + genderAdjustment
+        return bmi.roundToInt()
     }
+
 
     /**
      * Returns the BMI category as a string based on the provided Body enum.

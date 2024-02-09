@@ -1,4 +1,4 @@
-package com.lakshaykamat.bmiBliss.ui
+package com.lakshaykamat.bmiBliss.view.screens
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -38,7 +38,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.lakshaykamat.bmiBliss.R
-import com.lakshaykamat.bmiBliss.data.BMI
+import com.lakshaykamat.bmiBliss.viewModel.BMI
 import com.lakshaykamat.bmiBliss.data.BmiResult
 import com.lakshaykamat.bmiBliss.ui.theme.BMICalculatorTheme
 
